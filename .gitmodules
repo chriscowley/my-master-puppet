@@ -1,0 +1,78 @@
+[submodule "modules/yumrepos"]
+	path = modules/yumrepos
+	url = git@github.com:chriscowley/puppet-yumrepos.git
+[submodule "modules/apt"]
+	path = modules/apt
+	url = git@github.com:chriscowley/puppet-apt.git
+[submodule "modules/gcc"]
+	path = modules/gcc
+	url = git@github.com:chriscowley/puppet-gcc.git
+[submodule "modules/glusterfs"]
+	path = modules/glusterfs
+	url = git@github.com:chriscowley/puppet-glusterfs.git
+[submodule "modules/htop"]
+	path = modules/htop
+	url = git@github.com:chriscowley/puppet-htop.git
+[submodule "modules/mongodb"]
+	path = modules/mongodb
+	url = git@github.com:chriscowley/puppet-mongodb.git
+[submodule "modules/nagios"]
+	path = modules/nagios
+	url = git@github.com:chriscowley/puppet-nagios.git
+[submodule "modules/nodejs"]
+	path = modules/nodejs
+	url = git@github.com:chriscowley/puppet-nodejs.git
+[submodule "modules/ntp"]
+	path = modules/ntp
+	url = git@github.com:chriscowley/puppet-ntp.git
+[submodule "modules/puppet"]
+	path = modules/puppet
+	url = git@github.com:chriscowley/puppet-puppet.git
+[submodule "modules/rabbitmq"]
+	path = modules/rabbitmq
+	url = git@github.com:chriscowley/puppet-rabbitmq.git
+[submodule "modules/razor"]
+	path = modules/razor
+	url = git@github.com:chriscowley/puppet-razor.git
+[submodule "modules/rdiff-backup"]
+	path = modules/rdiff-backup
+	url = git@github.com:chriscowley/puppet-rdiff-backup.git
+[submodule "modules/ruby"]
+	path = modules/ruby
+	url = git@github.com:chriscowley/puppet-ruby.git
+[submodule "modules/shell"]
+	path = modules/shell
+	url = git@github.com:chriscowley/puppet-shell.git
+[submodule "modules/stdlib"]
+	path = modules/stdlib
+	url = git@github.com:chriscowley/puppet-stdlib.git
+[submodule "modules/sudo"]
+	path = modules/sudo
+	url = git@github.com:chriscowley/puppet-sudo.git
+[submodule "modules/tftp"]
+	path = modules/tftp
+	url = git@github.com:chriscowley/puppet-tftp.git
+[submodule "modules/vcsrepo"]
+	path = modules/vcsrepo
+	url = git@github.com:chriscowley/puppet-vcsrepo.git
+[submodule "modules/vim"]
+	path = modules/vim
+	url = git@github.com:chriscowley/puppet-vim.git
+[submodule "modules/wget"]
+	path = modules/wget
+	url = git@github.com:chriscowley/puppet-wget.git
+[submodule "modules/xinetd"]
+	path = modules/xinetd
+	url = git@github.com:chriscowley/puppet-xinetd.git
+[submodule "modules/nfs"]
+	path = modules/nfs
+	url = git@github.com:chriscowley/puppet-nfs.git
+[submodule "modules/nginx"]
+	path = modules/nginx
+	url = git@github.com:chriscowley/puppet-nginx.git
+[submodule "modules/nethogs"]
+	path = modules/nethogs
+	url = git@github.com:chriscowley/puppet-nethogs.git
+[submodule "modules/network"]
+	path = modules/network
+	url = git@github.com:chriscowley/puppet-network.git

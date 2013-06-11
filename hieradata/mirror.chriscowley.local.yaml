@@ -1,0 +1,4 @@
+---
+exports:
+  - /srv/export
+  - /srv/export2

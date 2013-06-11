@@ -1,0 +1,8 @@
+---
+exports:
+  - /srv/family
+  - /srv/iso
+  - /srv/images
+  - /srv/media
+  - /srv/music
+  - /srv/shotwell
