@@ -76,3 +76,6 @@
 [submodule "modules/network"]
 	path = modules/network
 	url = git@github.com:chriscowley/puppet-network.git
+[submodule "modules/lvm"]
+	path = modules/lvm
+	url = git@github.com:chriscowley/puppet-lvm.git

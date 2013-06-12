@@ -12,29 +12,53 @@ class basenode {
 class glusternode {
   include basenode
   include yumrepos::gluster
+
+  # Create Logical Volume and base XFS filesystem on each node
+  volume_group { "vg0":
+    ensure           => present,
+    physical_volumes => "/dev/vdb",
+    require          => Physical_volume["/dev/vdb"]
+  }
+  physical_volume { "/dev/vdb":
+    ensure => present
+  }
+  logical_volume { "gv0":
+    ensure       => present,
+    require     => Volume_group['vg0'],
+    volume_group => "vg0",
+    size         => "7G",
+  }
   file { [ '/export', '/export/gv0']:
     seltype => 'usr_t',
     ensure  => directory,
   }
-  
   package { 'xfsprogs': ensure => installed 
   }
-  exec { 'lvcreate /dev/vg0/gv0':
-    command => '/sbin/lvcreate -L 6G -n gv0 vg0',
-    creates => '/dev/vg0/gv0',
-    notify  => Exec['mkfs /dev/vg0/gv0'],
+  filesystem { "/dev/vg0/gv0":
+    ensure   => present,
+    fs_type  => "xfs",
+    options  => "-i size=512",
+    require => [Package['xfsprogs'], Logical_volume['gv0'] ],
   }
-  exec { 'mkfs /dev/vg0/gv0':
-    command     => '/sbin/mkfs.xfs -i size=512 /dev/vg0/gv0',
-    require     => [ Package['xfsprogs'], Exec['lvcreate /dev/vg0/gv0'] ],
-    refreshonly => true,
-  }
+
+  # Mount XFS file system and create the bricks
+#  exec { 'lvcreate /dev/vg0/gv0':
+#    command => '/sbin/lvcreate -L 6G -n gv0 vg0',
+#    creates => '/dev/vg0/gv0',
+#    notify  => Exec['mkfs /dev/vg0/gv0'],
+#  }
+#  exec { 'mkfs /dev/vg0/gv0':
+#    command     => '/sbin/mkfs.xfs -i size=512 /dev/vg0/gv0',
+#    require     => [ Package['xfsprogs'], Exec['lvcreate /dev/vg0/gv0'] ],
+#    refreshonly => true,
+#  }
   mount { '/export/gv0':
     device  => '/dev/vg0/gv0',
     fstype  => 'xfs',
     options => 'defaults',
     ensure  => mounted,
-    require => [ Exec['mkfs /dev/vg0/gv0'], File['/export/gv0'] ],
+#    require => [ Exec['mkfs /dev/vg0/gv0'], File['/export/gv0'] ],
+    require => [ Filesystem['/dev/vg0/gv0'], File['/export/gv0'] ],
   }
   class { 'glusterfs::server':
     peers => $::hostname ? {
