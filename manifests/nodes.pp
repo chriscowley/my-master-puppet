@@ -113,6 +113,16 @@ node 'backup.chriscowley.local' {
   }
   class {'nfs::server':
   }
+  file { '/srv/backup/nadege':
+    ensure => directory,
+    owner  => 'nadege',
+    group  => 'nadege',
+  }
+  file { '/srv/backup/anne':
+    ensure => directory,
+    owner  => 'anne',
+    group  => 'anne',
+  }
 }
 
 node 'mirror.chriscowley.local' {

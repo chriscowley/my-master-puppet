@@ -79,3 +79,6 @@
 [submodule "modules/lvm"]
 	path = modules/lvm
 	url = git@github.com:chriscowley/puppet-lvm.git
+[submodule "modules/mosh"]
+	path = modules/mosh
+	url = git@github.com:chriscowley/puppet-mosh.git
