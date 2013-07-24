@@ -7,6 +7,8 @@ class basenode {
   include yumrepos::epel
   class { 'nethogs':
   }
+  class { 'mosh':
+  }
 }
 
 class glusternode {
@@ -84,6 +86,7 @@ node 'puppet.chriscowley.local' {
   include puppet
 # include yumrepos::cloudera
 #  include yumrepos::epel
+
 }
 
 node 'gluster1' {
