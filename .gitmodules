@@ -82,3 +82,6 @@
 [submodule "modules/mosh"]
 	path = modules/mosh
 	url = git@github.com:chriscowley/puppet-mosh.git
+[submodule "modules/cron"]
+	path = modules/cron
+	url = git@github.com:chriscowley/puppet-cron.git
