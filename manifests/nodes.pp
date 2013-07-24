@@ -130,6 +130,23 @@ node 'backup.chriscowley.local' {
 
 node 'mirror.chriscowley.local' {
   include basenode
+  cron::daily {
+    'update_local_mirror':
+      minute  => '2',
+      hour    => '4',
+      user    => 'nginx',
+      require => [File['/var/www/mirror'],File['/usr/local/bin/centos-mirror.sh']],
+      command => 'rsync -art --progress rsync://mirror.ovh.net/ftp.centos.org/6/os/x86_64 /var/www/mirror/centos/6/os/  --bwlimit 200',
+  }
+  file { '/var/www/mirror':
+    ensure => directory,
+    owner  => 'nginx',
+  }
+  file {'/usr/local/bin/centos-mirror.sh':
+    owner => 'root',
+    mode  => 'ga=rx,u=rwx',
+    source => 'puppet:///modules/scripts/centos-mirror.sh',
+  }
 #  class { 'nginx': }
 #  nginx::resource::vhost { 'mirror.chriscowley.local':
 #    ensure   => present,
