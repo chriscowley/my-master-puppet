@@ -67,9 +67,6 @@
 [submodule "modules/nfs"]
 	path = modules/nfs
 	url = git@github.com:chriscowley/puppet-nfs.git
-[submodule "modules/nginx"]
-	path = modules/nginx
-	url = git@github.com:chriscowley/puppet-nginx.git
 [submodule "modules/nethogs"]
 	path = modules/nethogs
 	url = git@github.com:chriscowley/puppet-nethogs.git
@@ -94,3 +91,9 @@
 [submodule "modules/apache"]
 	path = modules/apache
 	url = git@github.com:chriscowley/puppet-apache.git
+[submodule "modules/mysql"]
+	path = modules/mysql
+	url = git@github.com:chriscowley/puppet-mysql.git
+[submodule "modules/php"]
+	path = modules/php
+	url = git@github.com:chriscowley/puppet-php.git
