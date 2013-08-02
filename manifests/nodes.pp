@@ -126,17 +126,35 @@ node 'backup.chriscowley.local' {
     owner  => 'anne',
     group  => 'anne',
   }
+  file { '/srv/backup/timothy':
+    ensure => directory,
+    owner  => 'timothy',
+    group  => 'timothy',
+  }
+  file { '/srv/backup/nicolas':
+    ensure => directory,
+    owner  => 'nicolas',
+    group  => 'nicolas',
+  }
 }
 
 node 'mirror.chriscowley.local' {
   include basenode
   cron::daily {
-    'update_local_mirror':
+    'update_local_centos_mirror':
       minute  => '2',
       hour    => '4',
       user    => 'nginx',
       require => [File['/var/www/mirror'],File['/usr/local/bin/centos-mirror.sh']],
-      command => 'rsync -art --progress rsync://mirror.ovh.net/ftp.centos.org/6/os/x86_64 /var/www/mirror/centos/6/os/  --bwlimit 200',
+#      command => 'rsync -art --progress rsync://mirror.ovh.net/ftp.centos.org/6/os/x86_64 /var/www/mirror/centos/6/os/  --bwlimit 200',
+      command => '/usr/local/bin/centos-mirror.sh',
+  }
+  cron::daily { 'update_local_epel_mirror':
+    minute  => '12',
+    hour    => '4',
+    user    => 'nginx',
+    require => [File['/var/www/mirror'],File['/usr/local/bin/epel-mirror.sh']],
+    command => '/usr/local/bin/epel-mirror.sh',
   }
   file { '/var/www/mirror':
     ensure => directory,
@@ -146,6 +164,11 @@ node 'mirror.chriscowley.local' {
     owner => 'root',
     mode  => 'ga=rx,u=rwx',
     source => 'puppet:///modules/scripts/centos-mirror.sh',
+  }
+  file {'/usr/local/bin/epel-mirror.sh':
+    owner => 'root',
+    mode  => 'ga=rx,u=rwx',
+    source => 'puppet:///modules/scripts/epel-mirror.sh',
   }
 #  class { 'nginx': }
 #  nginx::resource::vhost { 'mirror.chriscowley.local':
@@ -181,11 +204,20 @@ node 'monitor.chriscowley.local' {
   }
 }
 
-node 'openstack1.chriscowley.local' {
+node 'lab01' {
   include basenode
+#  class { 'yumrepos::rdo':
+#  }
+  package { 'nmap':
+    ensure => latest,
+  }
 }
 
 node 'webdev.chriscowley.local' {
+  include basenode
+}
+
+node 'ext.chriscowley.local' {
   include basenode
 }
 

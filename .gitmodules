@@ -85,6 +85,3 @@
 [submodule "modules/cron"]
 	path = modules/cron
 	url = git@github.com:chriscowley/puppet-cron.git
-[submodule "modules/scripts"]
-	path = modules/scripts
-	url = git@github.com:chriscowley/puppet-scripts.git
