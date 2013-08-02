@@ -88,3 +88,9 @@
 [submodule "modules/scripts"]
 	path = modules/scripts
 	url = git@github.com:chriscowley/puppet-scripts.git
+[submodule "modules/concat"]
+	path = modules/concat
+	url = git@github.com:chriscowley/puppet-concat.git
+[submodule "modules/apache"]
+	path = modules/apache
+	url = git@github.com:chriscowley/puppet-apache.git
