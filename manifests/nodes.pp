@@ -219,6 +219,32 @@ node 'webdev.chriscowley.local' {
 
 node 'ext.chriscowley.local' {
   include basenode
+  include php::fpm::daemon
+  php::fpm::conf { 'www':
+    listen  => '127.0.0.1:9001',
+    user    => 'nginx',
+    # For the user to exist
+    require => Package['nginx'],
+  }
+  package { 'nginx':
+    ensure => latest,
+  }
+#
+#  class { 'apache': }
+#  apache::mod { 'php':
+#    require => Package['php'],
+#  }
+#  class { 'php::mod_php5': inifile => '/etc/httpd/conf/php.ini' }
+
+#  apache::vhost { 'tflux.chriscowley.local':
+#    serveraliases => [
+#      'tflux.chriscowley.me.uk',
+#      'tflux',
+ #   ],
+ #   port    => '80',
+ #   docroot => '/var/www/tflux',
+ # }
+
 }
 
 node 'ci.chriscowley.local' {
