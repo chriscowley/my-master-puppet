@@ -97,3 +97,6 @@
 [submodule "modules/php"]
 	path = modules/php
 	url = git@github.com:chriscowley/puppet-php.git
+[submodule "modules/nginx"]
+	path = modules/nginx
+	url = git@github.com:chriscowley/puppet-nginx.git

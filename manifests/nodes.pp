@@ -219,31 +219,30 @@ node 'webdev.chriscowley.local' {
 
 node 'ext.chriscowley.local' {
   include basenode
+  include php::cli
   include php::fpm::daemon
+  php::ini { '/etc/php.ini':
+    memory_limit   => '256M',
+  }
+  php::module { [ 'mysql', 'pecl-apc' ]: }
+  php::module::ini {'pecl-apc':
+    settings => {
+      'apc.enabled'      => '1',
+      'apc.shm_segments' => '1',
+      'apc.shm_size'     => '64',
+    }
+  }
   php::fpm::conf { 'www':
     listen  => '127.0.0.1:9001',
     user    => 'nginx',
     # For the user to exist
-    require => Package['nginx'],
+    require => Class['nginx'],
   }
-  package { 'nginx':
-    ensure => latest,
+  class { 'nginx':
   }
-#
-#  class { 'apache': }
-#  apache::mod { 'php':
-#    require => Package['php'],
-#  }
-#  class { 'php::mod_php5': inifile => '/etc/httpd/conf/php.ini' }
-
-#  apache::vhost { 'tflux.chriscowley.local':
-#    serveraliases => [
-#      'tflux.chriscowley.me.uk',
-#      'tflux',
- #   ],
- #   port    => '80',
- #   docroot => '/var/www/tflux',
- # }
+  nginx::vhost::php {'torrents':
+    docroot_suffix => 'html/',
+  }
 
 }
 
