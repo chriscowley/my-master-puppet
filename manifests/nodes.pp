@@ -217,6 +217,10 @@ node 'webdev.chriscowley.local' {
   include basenode
 }
 
+node 'db.chriscowley.local' {
+  include basenode
+}
+
 node 'ext.chriscowley.local' {
   include basenode
   include php::cli
