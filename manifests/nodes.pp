@@ -219,10 +219,51 @@ node 'webdev.chriscowley.local' {
 
 node 'db.chriscowley.local' {
   include basenode
+  class { 'mysql::server':
+    config_hash => { 'root_password' => 'mysqlpassword' },
+  }
+  mysql::server::config { 'basic_config':
+    settings => {
+      'mysqld' => {
+        'bind-address' => '192.168.1.104',
+      }
+    }
+  }
+  mysql::db { 'torrentflux':
+    user => 'torrentflux',
+    password => 'torrentflux',
+    host     => 'torrents.chriscowley.local',
+    grant    => ['all'],
+
+  }
+  
+
 }
 
 node 'ext.chriscowley.local' {
   include basenode
+  class { 'yumrepos::rpmfusion': }
+  package { 'vlc':
+    ensure => latest,
+    require => Class['yumrepos::rpmfusion']
+  }
+  package { 'unrar':
+    ensure => latest,
+    require => Class['yumrepos::rpmfusion']
+  }
+  package { 'cksfv':
+    ensure => latest,
+    require => Class['yumrepos::rpmfusion']
+  }
+  package { 'perl-Convert-UUlib':
+    ensure => latest,
+    require => Class['yumrepos::epel']
+  }
+  package { 'transmission-cli':
+    ensure => latest,
+    require => Class['yumrepos::epel']
+  }
+  
   include php::cli
   include php::fpm::daemon
   php::ini { '/etc/php.ini':

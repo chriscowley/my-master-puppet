@@ -97,3 +97,6 @@
 [submodule "modules/nginx"]
 	path = modules/nginx
 	url = git@github.com:chriscowley/puppet-nginx.git
+[submodule "modules/mysql"]
+	path = modules/mysql
+	url = https://github.com/puppetlabs/puppetlabs-mysql.git
