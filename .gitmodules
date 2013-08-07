@@ -100,3 +100,6 @@
 [submodule "modules/mysql"]
 	path = modules/mysql
 	url = https://github.com/puppetlabs/puppetlabs-mysql.git
+[submodule "modules/bind"]
+	path = modules/bind
+	url = https://github.com/thias/puppet-bind.git
