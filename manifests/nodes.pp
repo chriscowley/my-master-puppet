@@ -2,13 +2,17 @@ class basenode {
   class {'htop':
   }
   include vim
-  include yumrepos
   include puppet::agent
+  include yumrepos
   include yumrepos::epel
   class { 'nethogs':
   }
   class { 'mosh':
   }
+}
+
+class ubuntunode {
+  class { 'htop': }
 }
 
 class glusternode {
@@ -293,4 +297,8 @@ node 'ext.chriscowley.local' {
 
 node 'ci.chriscowley.local' {
   include basenode
+}
+
+node 'gitlab.chriscowley.local' {
+  include ubuntunode
 }
