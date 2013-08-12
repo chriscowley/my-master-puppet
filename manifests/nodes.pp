@@ -1,10 +1,12 @@
 class basenode {
+  if $osfamily == 'RedHat' {
+    include yumrepos
+    include yumrepos::epel
+  }
   class {'htop':
   }
   include vim
   include puppet::agent
-  include yumrepos
-  include yumrepos::epel
   class { 'nethogs':
   }
   class { 'mosh':
@@ -238,7 +240,12 @@ node 'db.chriscowley.local' {
     password => 'torrentflux',
     host     => 'torrents.chriscowley.local',
     grant    => ['all'],
-
+  }
+  mysql::db { 'gitlab':
+    user => 'gitlab',
+    password => 'gitlab',
+    host     => 'torrents.chriscowley.local',
+    grant    => ['all'],
   }
   
 
@@ -292,7 +299,13 @@ node 'ext.chriscowley.local' {
   nginx::vhost::php {'torrents':
     docroot_suffix => 'html/',
   }
-
+  class { 'rvm':
+    version => '1.20.12'
+  }
+  class { 'gitlab':
+    db_server => 'db.chriscowley.local',
+    vhost     => 'gitlab.chriscowley.me.uk',
+  }
 }
 
 node 'ci.chriscowley.local' {
@@ -301,4 +314,24 @@ node 'ci.chriscowley.local' {
 
 node 'gitlab.chriscowley.local' {
   include ubuntunode
+}
+
+node 'ns1.chriscowley.local' {
+  include basenode
+  include bind
+  bind::server::conf { '/etc/named.conf':
+    listen_on_addr    => [ 'any' ],
+    forwarders        => [ '192.168.1.1' ],
+    allow_query       => [ 'localnets' ],
+    zones             => {
+      'chriscowley.local' => [
+        'type master',
+        'file "myzone.lan"',
+      ],
+      '1.168.192.in-addr.arpa' => [
+        'type master',
+        'file "1.168.192.in-addr.arpa"',
+      ],
+    },
+  }
 }

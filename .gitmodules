@@ -103,3 +103,9 @@
 [submodule "modules/bind"]
 	path = modules/bind
 	url = https://github.com/thias/puppet-bind.git
+[submodule "modules/rvm"]
+	path = modules/rvm
+	url = git://github.com/blt04/puppet-rvm.git
+[submodule "modules/gitlab"]
+	path = modules/gitlab
+	url = git@github.com:chriscowley/puppet-gitlab.git
