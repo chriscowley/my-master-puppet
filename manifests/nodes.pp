@@ -334,4 +334,13 @@ node 'ns1.chriscowley.local' {
       ],
     },
   }
+  class { 'dhcp':
+    domainname    => 'chriscowley.local',
+    nameservers   => ['192.168.1.1', '8.8.8.8'],
+    subnet        => '192.168.1.0',
+    netmask       => '255.255.255.0',
+    addressrange  => ['192.168.1.30', '192.168.1.50' ],
+    router        => '192.168.1.1',
+    ensure        => 'stopped',
+  }
 }

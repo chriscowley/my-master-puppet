@@ -109,3 +109,6 @@
 [submodule "modules/gitlab"]
 	path = modules/gitlab
 	url = git@github.com:chriscowley/puppet-gitlab.git
+[submodule "modules/dhcp"]
+	path = modules/dhcp
+	url = git@github.com:chriscowley/puppet-dhcp.git
